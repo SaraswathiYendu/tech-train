@@ -1,0 +1,373 @@
+PL/SQL
+------
+- Anonymous Procedures
+- Stored Procedures 
+- statements and loops
+- exception handling 
+- functions
+- triggers
+- cursors
+- views
+
+/*
+Procedures are of two types 
+1. Stored Procedures
+2. Anonymous Procedures
+*/
+
+-- Anonymous Procedure
+SET serveroutput ON; 
+
+--Hello Proc
+BEGIN
+    dbms_output.put_line('Hello PL-SQL');
+END;
+/
+
+-- Compute Addition of 2 nos. 
+DECLARE 
+    x number(10);
+    y number(10); 
+    z number(10);
+BEGIN
+    x := 10;
+    y := 20;
+    z := x+y;
+    dbms_output.put_line('Ans is ' || z);
+END;
+/
+
+CREATE TABLE employee_77777(
+    emp_id number(6) NOT NULL, 
+    emp_name varchar2(255), 
+    branch varchar2(255),
+    department varchar2(255), 
+    salary number(10,2),  --2 decimal place
+    PRIMARY KEY(emp_id)
+    );
+
+INSERT INTO EMPLOYEE_77777 values (1, 'harry potter', 'mumbai', 'sales', 95000);
+INSERT INTO EMPLOYEE_77777 values (2, 'ronald weasley', 'mumbai', 'sales', 80000);
+INSERT INTO EMPLOYEE_77777 values (3, 'hermione granger', 'london', 'sales', 120000);
+INSERT INTO EMPLOYEE_77777 values (4, 'draco malfoy', 'london', 'sales', 85000);
+INSERT INTO EMPLOYEE_77777 values (5, 'frodo baggins', 'shire', 'IT', 90000);
+INSERT INTO EMPLOYEE_77777 values (6, 'samwise gamaje', 'shire', 'IT', 75000);
+
+select * from employee_77777;
+
+--Stored Procedure to compute minimum of 2 numbers
+CREATE OR REPLACE procedure min_num(n1 IN number,n2 IN number ) IS
+BEGIN
+    if n1 < n2 then
+        dbms_output.put_line(n1 ||' is smaller');
+    else
+        dbms_output.put_line(n2 ||' is smaller');
+    end if;
+END;
+/
+
+EXEC min_num(10,5); 
+EXEC min_num(10,15); 
+
+/* Compute the maximum salary of the employee based on department given  */
+
+CREATE OR REPLACE procedure max_salary(dept IN varchar2, result OUT number) IS
+BEGIN
+    select MAX(salary) into result
+    from employee_77777
+    where department = dept;
+END;
+/
+
+DECLARE
+    dept varchar2(255); 
+    ans number(10);
+BEGIN
+    dept := 'IT'; 
+    max_salary(dept,ans);
+    dbms_output.put_line('Max salary in ' || dept || ' is ' || ans);
+END;
+/
+
+/* create a stored proc to compute Average salary of employees that belong to the given branch */
+
+-- TODO 
+
+/* Inserting mutiple rows in same query at a same time. */
+INSERT ALL 
+    INTO employee_77777 VALUES (7, 'jack reacher', 'new york', 'admin', 89000)
+    INTO employee_77777 VALUES (8, 'geoff squire', 'new york', 'admin', 92000)
+select 1 from dual; 
+
+select * from employee_77777;
+
+
+/*
+    Give the increment to the employees on the basis of department and percent given. 
+    ex. If IT department gets 5% increment then update the salary of employees of IT department accordingly. 
+*/
+
+CREATE OR REPLACE procedure salary_incr(dept IN varchar2, percent IN number) IS
+BEGIN 
+    update employee_77777
+    SET salary = salary + ((salary/100) * percent)
+    where department = dept;
+END; 
+/
+
+BEGIN
+    salary_incr('sales', 8);
+    salary_incr('IT', 5);
+    salary_incr('admin', 3);
+END;
+/
+
+select * from employee_77777;
+
+/* Statements and Loops 
+    - for loop 
+    - basic loop 
+    - while 
+    - if/else
+    - if/elif/else
+*/
+
+-- for loop 
+DECLARE 
+    i number; 
+BEGIN
+    for i in 0..5 loop
+        dbms_output.put_line(i);
+    END loop; 
+END;
+/
+
+
+-- Reverse for loop 
+DECLARE 
+    i number; 
+BEGIN
+    for i in REVERSE 0..5 loop
+        dbms_output.put_line(i);
+    END loop; 
+END;
+/
+
+-- while loop 
+
+DECLARE 
+    i number := 0; 
+BEGIN
+     while i<6 loop
+        dbms_output.put_line(i);
+        i := i +1;  -- i++ does not work
+     end loop;
+END;
+/
+
+-- basic loop 
+DECLARE 
+    i number := 0; 
+BEGIN
+      loop 
+        dbms_output.put_line(i);
+        i := i+1;
+        if i > 5 then
+            exit; 
+        end if; 
+        
+      end loop;
+END;
+/
+
+DECLARE 
+    percent number := 80; 
+BEGIN
+    if percent > 75 then
+        dbms_output.put_line('A');
+    ELSIF percent > 60 then
+        dbms_output.put_line('B');
+    ELSE
+        dbms_output.put_line('C');
+    end if; 
+END;
+/
+
+/* Exception Handling 
+ - Oracle has many in-built exceptions that could be used in the procedures to counter unwanted scenarios
+ - Other than Inbuilt exceptions, PL/SQL allows us to create our own self-defined exceptions.    
+*/
+
+/* Create a proc that gives the name and salary of employee based on the ID value given. 
+   If the valus of ID is invalid, display appropriate message in the output. */
+
+CREATE OR REPLACE procedure fetch_data(id IN number, ename OUT varchar2, esalary OUT number) IS
+BEGIN
+    select emp_name, salary into ename,esalary
+    from employee_77777
+    where emp_id = id; 
+EXCEPTION 
+    WHEN NO_DATA_FOUND THEN 
+        dbms_output.put_line(id || ' does not exist in the record');
+    WHEN OTHERS THEN 
+        dbms_output.put_line('Something went wrong');
+END; 
+/
+
+DECLARE 
+    name varchar2(255); 
+    salary number(10); 
+BEGIN
+    fetch_data(5,name,salary ); 
+    dbms_output.put_line(name || '   ' || salary);
+    
+    fetch_data(15,name,salary ); 
+END;
+/
+
+-- Inbuilt Exception 
+
+CREATE OR REPLACE procedure fetch_data_custom(id IN employee77777.emp_id%TYPE, ename OUT varchar2, esalary OUT number) IS 
+MY_INVALID_ID_EXCEPTION EXCEPTION; 
+BEGIN
+    if id < 0 THEN 
+        RAISE MY_INVALID_ID_EXCEPTION; 
+        dbms_output.put_line('in if...');
+    end if; 
+    select emp_name, salary into ename,esalary
+    from employee_77777
+    where emp_id = id; 
+EXCEPTION 
+    WHEN MY_INVALID_ID_EXCEPTION THEN
+        dbms_output.put_line('Hey! ID cannot be <= 0');
+    WHEN NO_DATA_FOUND THEN 
+        dbms_output.put_line(id || ' does not exist in the record');
+    WHEN OTHERS THEN 
+        dbms_output.put_line('Something went wrong');
+END; 
+/
+
+DECLARE 
+    name varchar2(255); 
+    salary number(10); 
+BEGIN
+    fetch_data_custom(-5,name,salary ); 
+    dbms_output.put_line(name || '   ' || salary);
+END;
+/
+
+-- Functions: Functions are similar in structure to procedures except they have a return statement. 
+
+--compute total salary of all employees using function 
+
+CREATE or REPLACE function total_sal_func 
+RETURN number IS
+total_sal number(10) := 0;
+BEGIN
+    select SUM(salary) into total_sal
+    from employee_77777;
+    
+    return total_sal;
+END;
+/
+
+BEGIN
+    dbms_output.put_line('Total Salary: ' || total_sal_func());
+END;
+/
+
+--compute total number of employees in a given department using function 
+
+CREATE or REPLACE function total_emp(dept IN employee77777.department%TYPE) 
+RETURN number IS
+    cnt number := 0; 
+BEGIN
+    select COUNT(emp_id) into cnt
+    from employee_77777
+    where department = dept; 
+    
+    return cnt;
+END;
+/
+
+BEGIN
+    dbms_output.put_line(total_emp('IT'));
+END;
+/
+/* Create a trigger to maintain log od updates in employee table. If salary is updated compute the difference in old and 
+new salary along with date in log table. */
+
+create table emp_log_sal(emp_id number(6), old_salary number(10,2), new_salary number(10,2), diff number(10,2), changeDate Date);
+
+CREATE OR REPLACE trigger emp_trgg AFTER UPDATE ON employee_77777
+FOR EACH ROW
+DECLARE
+sal_diff number := 0;
+BEGIN
+    sal_diff := :NEW.salary - :OLD.salary; 
+    insert into emp_log_sal values (:OLD.emp_id, :OLD.salary, :NEW.salary, sal_diff, SYSDATE);
+END;
+/
+
+update employee_77777
+SET salary = 130000
+where emp_id=1;
+
+select * from employee_77777;
+select * from emp_log_sal;
+
+
+/* 
+    Cursors: Implicit and Explicit Cursors 
+*/
+
+-- Display all employees based on given branch. 
+
+CREATE OR REPLACE PROCEDURE display_emp(ebranch IN employee_77777.branch%TYPE) IS  -- implicit
+--create a cursor
+CURSOR emp_cur IS   --explicit 
+    select emp_id, branch, salary
+    from employee_77777
+    where branch = ebranch;
+    
+    emp_row  emp_cur%ROWTYPE; --implicit 
+BEGIN
+    IF NOT emp_cur%ISOPEN THEN   -- implicit
+        OPEN emp_cur; 
+    END IF; 
+    
+    --loop over the cursor 
+    LOOP
+        FETCH emp_cur INTO emp_row;
+        EXIT WHEN emp_cur%NOTFOUND; -- implicit
+        dbms_output.put_line(emp_row.emp_id || ' ' || emp_row.branch  || ' ' || emp_row.salary);
+    END LOOP; 
+    
+    CLOSE emp_cur;
+END; 
+/
+
+EXEC display_emp('london');
+
+--Create a View to hide salary info of the employee 
+
+CREATE VIEW emp_tbl_view AS
+select emp_id, emp_name, branch, department 
+from employee_77777; 
+
+select * from emp_tbl_view;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
