@@ -77,6 +77,25 @@ public class EmployeeDB {
 		dbClose();
 		return list;
 	}
+
+	public void insertEmployee(Employee e) {
+		dbConnect();
+		//logic for Inserting an employee
+		String sql="insert into employee(name,salary,branch) values (?,?,?)"; //SQL Injection prevention
+		/* To execute sql, prepare the statement */
+		try {
+			PreparedStatement pstmt =  con.prepareStatement(sql);
+			pstmt.setString(1, e.getName());
+			pstmt.setDouble(2, e.getSalary());
+			pstmt.setString(3, e.getBranch());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		dbClose();
+		
+	}
 }
 /* 
  fetch(select) : executeQuery()

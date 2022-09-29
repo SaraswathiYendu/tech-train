@@ -34,6 +34,17 @@ public class App {
 					}
 				break; 
 			case 2: 
+				System.out.println("Enter Employee details");
+				System.out.println("Enter Name");
+				sc.nextLine();
+				String name = sc.nextLine();
+				System.out.println("Enter salary");
+				double salary = sc.nextDouble();
+				System.out.println("Enter branch");
+				String branch = sc.next();
+				Employee e = new Employee(name,salary,branch);
+				employeeService.insertEmployee(e);
+				System.out.println("Employee record added to db..");
 				break;
 			case 3: 
 				break; 

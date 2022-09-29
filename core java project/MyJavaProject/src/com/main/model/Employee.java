@@ -5,6 +5,18 @@ public class Employee {
 	private String name;
 	private double salary;
 	private String branch;
+	
+	public Employee() {
+		
+	}
+
+	public Employee(String name, double salary, String branch) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.branch = branch;
+	}
+
 	//getters and setters and toString()
 	public int getId() {
 		return id;
