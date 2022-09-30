@@ -3,6 +3,7 @@ package com.main;
 import java.util.List;
 import java.util.Scanner;
 
+import com.main.dto.EmployeeStatsDto;
 import com.main.exception.InvalidIdException;
 import com.main.factory.EmployeeFactory;
 import com.main.model.Employee;
@@ -59,8 +60,15 @@ public class App {
 				
 				break; 
 			case 4: 
+				System.out.println("Enter the branch to filter the employees: ");
+				sc.nextLine();
+				branch = sc.nextLine();
+				employeeService.filterByBranch(branch);
 				break;
 			case 5: 
+				System.out.println("******Employee Statistics********");
+				List<EmployeeStatsDto> list = employeeService.fetchStats();
+				list.parallelStream().forEach(emp->System.out.println(emp.getBranch() + "--" + emp.getNum()));
 				break;
 			case 6: 
 				break;

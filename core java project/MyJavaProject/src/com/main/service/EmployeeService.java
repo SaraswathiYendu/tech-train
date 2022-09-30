@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.main.db.EmployeeDB;
+import com.main.dto.EmployeeStatsDto;
 import com.main.model.Employee;
 
 public class EmployeeService {
@@ -35,10 +36,26 @@ public class EmployeeService {
 	public boolean validateId(int id) {
 		employeeDB = new EmployeeDB();
 		List<Employee> list = employeeDB.getAllEmployees();
-		list = list.stream().filter(e->e.getId() == id).collect(Collectors.toList());
+		list = list.parallelStream()
+					.filter(e->e.getId() == id)
+					.collect(Collectors.toList());
+		
 		if(list != null && list.size() == 1)
 			return true; 
 		return false;
 	}
 
+	public void filterByBranch(String branch) {
+		employeeDB = new EmployeeDB();
+		List<Employee> list = employeeDB.getAllEmployees();
+		list.parallelStream()
+			.filter(e->e.getBranch().equals(branch))
+			.forEach(e->System.out.println(e));
+	}
+
+	public List<EmployeeStatsDto> fetchStats() {
+		employeeDB = new EmployeeDB();
+		List<EmployeeStatsDto> list = employeeDB.fetchStats();
+		return list;
+	}
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.main.dto.EmployeeStatsDto;
 import com.main.model.Employee;
 
 public class EmployeeDB {
@@ -110,6 +111,28 @@ public class EmployeeDB {
 		}
 		dbClose();
 		
+	}
+
+	public List<EmployeeStatsDto> fetchStats() {
+		dbConnect();
+		String sql="select branch, COUNT(id) as number_of_employees from employee group by branch";
+		List<EmployeeStatsDto> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt =  con.prepareStatement(sql);
+			ResultSet rst = pstmt.executeQuery();
+			
+			while(rst.next()) {
+				EmployeeStatsDto dto = new EmployeeStatsDto();
+				dto.setBranch(rst.getString("branch"));
+				dto.setNum(rst.getInt("number_of_employees")); 
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			 
+		}
+		dbClose();
+		return list;
 	}
 }
 /* 
