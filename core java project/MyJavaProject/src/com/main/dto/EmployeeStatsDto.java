@@ -4,6 +4,7 @@ public class EmployeeStatsDto {
 	private String branch;
 	private int num;
 
+	//contructors , getters, setters, toString
 	public EmployeeStatsDto(String branch, int num) {
 		super();
 		this.branch = branch;

@@ -1,5 +1,7 @@
 package com.main;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ import com.main.exception.InvalidIdException;
 import com.main.factory.EmployeeFactory;
 import com.main.model.Employee;
 import com.main.service.EmployeeService;
+import com.main.utility.EmployeeSortUtility;
 
 public class App {
 	public static void main(String[] args) {
@@ -22,7 +25,7 @@ public class App {
 			System.out.println("3. Delete an Employee");
 			System.out.println("4. Fetch as per the Filter");
 			System.out.println("5. Employee Statistics");
-			System.out.println("6. Employee Data Sorting");
+			System.out.println("6. Employee Sorting By Salary-ASC");
 			System.out.println("0. Exit");
 			int input = sc.nextInt();
 			if(input == 0) {
@@ -71,19 +74,21 @@ public class App {
 				list.parallelStream().forEach(emp->System.out.println(emp.getBranch() + "--" + emp.getNum()));
 				break;
 			case 6: 
+				List<Employee> empList = employeeService.getAllEmployees();
+				//sort the list as per salary-ASC
+				Collections.sort(empList, new EmployeeSortUtility()); //e1(id,branch,name,salary) e2 e3 e4
+				
+				empList.stream().forEach(emp->System.out.println(emp));
 				break;
 			default: 
 				System.out.println("Invalid Option");
 				break;
 			}
 		}
-		
+		sc.close();
 	}
 }
-
-
  
-
 
 
 
