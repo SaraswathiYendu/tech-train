@@ -3,6 +3,7 @@ package com.main;
 import java.util.List;
 import java.util.Scanner;
 
+import com.main.exception.InvalidIdException;
 import com.main.factory.EmployeeFactory;
 import com.main.model.Employee;
 import com.main.service.EmployeeService;
@@ -48,8 +49,14 @@ public class App {
 				EmployeeFactory.getAllEmployees();
 				System.out.println("Enter Employee ID to delete: ");
 				int id = sc.nextInt();
-				employeeService.deleteEmployeeById(id);
-				System.out.println("Employee Record deleted from the DB..");
+				boolean isValid = employeeService.validateId(id);
+				if(isValid == true) {
+					employeeService.deleteEmployeeById(id);
+					System.out.println("Employee Record deleted from the DB..");
+				}
+				else
+					System.out.println("Invalid ID, Please try again");
+				
 				break; 
 			case 4: 
 				break;

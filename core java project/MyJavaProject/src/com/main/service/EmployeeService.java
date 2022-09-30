@@ -2,6 +2,7 @@ package com.main.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.main.db.EmployeeDB;
 import com.main.model.Employee;
@@ -29,6 +30,15 @@ public class EmployeeService {
 		employeeDB.deleteEmployeeById(id);
 		employeeDB = null;
 		
+	}
+
+	public boolean validateId(int id) {
+		employeeDB = new EmployeeDB();
+		List<Employee> list = employeeDB.getAllEmployees();
+		list = list.stream().filter(e->e.getId() == id).collect(Collectors.toList());
+		if(list != null && list.size() == 1)
+			return true; 
+		return false;
 	}
 
 }
