@@ -24,4 +24,11 @@ public class EmployeeService {
 		employeeDB = null;
 	}
 
+	public void deleteEmployeeById(int id) {
+		employeeDB = new EmployeeDB();//300X
+		employeeDB.deleteEmployeeById(id);
+		employeeDB = null;
+		
+	}
+
 }

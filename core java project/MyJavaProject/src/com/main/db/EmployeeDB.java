@@ -96,6 +96,21 @@ public class EmployeeDB {
 		dbClose();
 		
 	}
+
+	public void deleteEmployeeById(int id) {
+		dbConnect();
+		String sql="delete from employee where id=?";
+		try {
+			PreparedStatement pstmt =  con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		dbClose();
+		
+	}
 }
 /* 
  fetch(select) : executeQuery()
