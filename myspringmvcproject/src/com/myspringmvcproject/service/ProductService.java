@@ -29,4 +29,14 @@ public class ProductService {
 		
 	}
 
+	public Product getProductById(int pid) {
+		 
+		return productDb.getProductById(pid);
+	}
+
+	public void editProduct(Product product) {
+		productDb.editProduct(product);
+		
+	}
+
 }

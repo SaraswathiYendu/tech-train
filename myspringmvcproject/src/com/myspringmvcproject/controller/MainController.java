@@ -70,6 +70,31 @@ public class MainController {
 		productService.deleteProduct(pid);
 		return "redirect:/products?msg=product deleted";
 	}
+	
+	@RequestMapping("/edit-product")
+	public String editProduct(@RequestParam("pid") int pid, Model model) {
+		//go to db and fetch the product by pid
+		Product product = productService.getProductById(pid);
+		//load the form with this product data filled in.. 
+		model.addAttribute("product", product);
+		return "edit-product";
+	}
+	
+	@RequestMapping("/process-edit-product")
+	public String processEditProduct(@RequestParam("title") String title,
+			   @RequestParam("price") double price,
+			   @RequestParam("vendor") String vendor,
+			   @RequestParam("id") int id,
+			   Product product) {
+		
+		product.setTitle(title);
+		product.setPrice(price);
+		product.setVendor(vendor);
+		product.setId(id);
+		
+		productService.editProduct(product);
+		return "redirect:/products?msg=Product updated";
+	}
 }
 
 

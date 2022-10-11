@@ -41,8 +41,9 @@
  	}
  	.msg{
  		border: 1px solid #cccccc; 
- 		padding:15px;
+ 		padding:9px;
  		background-color: #fefefe;
+ 		margin-left: 10px;
  	}
  </style>
 </head>
@@ -72,7 +73,7 @@
  		<span>Price: <c:out value="${p.price}"/> </span> <br />
  		<span>Price: <c:out value="${p.vendor}"/> </span>  
  		<br />
- 		<a href="#">Edit</a> | 
+ 		<a href="${pageContext.request.contextPath }/edit-product?pid=${p.id}">Edit</a> | 
  		<a href="${pageContext.request.contextPath }/delete-product?pid=${p.id}">Delete</a>
   </div>
  		<c:set var="sr" value="${sr=sr+1}"/>
