@@ -88,7 +88,6 @@ public class EmployeeController {
 	public List<Employee> getEmployeesByCityV2(@RequestParam("city") String city){
 		return employeeService.getEmployeesByCityV2(city);
 	}
-	
 	/* get all employee that belong to certain department JPQL*/
 	@GetMapping("/employee/department/v2/{did}")
 	public List<Employee> getEmployeesByDepartmentV2(@PathVariable("did") Long did){

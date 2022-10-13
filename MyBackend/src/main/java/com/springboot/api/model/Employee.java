@@ -1,10 +1,16 @@
 package com.springboot.api.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,6 +30,14 @@ public class Employee {
 
 	@ManyToOne
 	private Department department;//findByDepartmentId(id) * findByDepartmentName(name)
+	
+	@ManyToMany
+	@JoinTable(
+	        name = "employee_project",
+	        joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+	        inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id")
+	    )
+	private List<Project> project;
 	
 	public Long getId() {
 		return id;

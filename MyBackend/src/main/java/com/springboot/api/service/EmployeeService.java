@@ -46,17 +46,16 @@ public class EmployeeService {
 	}
 
 	public List<Employee> getEmployeesByCityV2(String city) {
-		 
 		return employeeRepository.getEmployeesByCityV2(city);
 	}
-	
 	public List<Employee> getEmployeesByDepartmentV2(Long did) { 
 		return employeeRepository.findByDepartmentIdV2(did);
 	}
 
 }
 /*
-EmployeeRepository extends JpaRepository<I> : save(T):T
+EmployeeRepository extends JpaRepository<I> : 
+save(T):T
 findAll() : List<T>
 deleteById(id) : void
 findById(id) : T
