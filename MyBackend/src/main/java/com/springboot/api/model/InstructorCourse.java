@@ -5,7 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-
+//List(ic(100x),ic(100x) )  : saveAll(list)
+//DTO carry(2=> ic(inst,course,year)) --> ic
 @Entity
 public class InstructorCourse {
 	@Id

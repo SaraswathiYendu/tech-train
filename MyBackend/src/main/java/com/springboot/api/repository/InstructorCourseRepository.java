@@ -1,8 +1,11 @@
 package com.springboot.api.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.springboot.api.model.Instructor;
 import com.springboot.api.model.InstructorCourse;
 
 public interface InstructorCourseRepository extends JpaRepository<InstructorCourse, Long>{
@@ -12,5 +15,9 @@ public interface InstructorCourseRepository extends JpaRepository<InstructorCour
 			+ " ic.course.id=?2 AND "
 			+ " ic.year=?3")
 	InstructorCourse validate(Long instructorID, Long courseId, String year);
+
+	@Query("select ic.instructor from InstructorCourse ic "
+			+ " where ic.course.id=?1 AND ic.year=?2")
+	List<Instructor> getInstructorsByCourseId(Long cid,String year);
 
 }
