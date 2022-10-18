@@ -3,6 +3,8 @@ package com.springboot.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,9 +42,13 @@ public class EmployeeController {
 		return employee;
 	}
 	
+	/* Activate Pagination  */
 	@GetMapping("/employees/all")
-	public List<Employee> getAllEmployees() {
-		List<Employee> list =employeeService.getAllEmployees();
+	public List<Employee> getAllEmployees(@RequestParam("page") Integer page,
+										  @RequestParam("size") Integer size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		List<Employee> list =employeeService.getAllEmployees(pageable);
 		return list; 
 	}
 	

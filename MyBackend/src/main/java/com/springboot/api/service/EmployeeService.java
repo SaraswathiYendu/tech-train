@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.springboot.api.model.Employee;
@@ -19,8 +20,8 @@ public class EmployeeService {
 		return employeeRepository.save(employee);
 	}
 
-	public List<Employee> getAllEmployees() {
-		return employeeRepository.findAll();
+	public List<Employee> getAllEmployees(Pageable pageable) {
+		return employeeRepository.findAll(pageable).getContent();
 	}
 
 	public void deleteById(Long id) {
