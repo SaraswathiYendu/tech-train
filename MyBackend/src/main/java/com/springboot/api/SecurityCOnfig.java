@@ -44,6 +44,8 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		/* Using http, I will define security of my api(s) on the basis of roles. */
 		http.authorizeRequests()
+		.antMatchers("/user/login").authenticated()
+		.antMatchers("/user/details").authenticated()
 		.antMatchers("/employees/all").authenticated()
 		.antMatchers("/department/all").hasAuthority("ADMIN")
 		.antMatchers("/course/all").hasAnyAuthority("ADMIN","INSTRUCTOR")
