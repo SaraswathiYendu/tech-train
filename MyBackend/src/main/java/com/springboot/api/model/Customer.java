@@ -1,9 +1,13 @@
 package com.springboot.api.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
 public class Customer {
@@ -18,6 +22,9 @@ public class Customer {
 	@OneToOne
 	private User user;
 
+	@OneToMany(fetch = FetchType.EAGER) //FetchType.LAZY
+	private List<Policy> policy; 
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,6 +55,14 @@ public class Customer {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Policy> getPolicy() {
+		return policy;
+	}
+
+	public void setPolicy(List<Policy> policy) {
+		this.policy = policy;
 	} 
 	
 	
