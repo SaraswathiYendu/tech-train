@@ -11,6 +11,8 @@ export class AppComponent {
   result:number;
   showAddress: boolean = false;
   lblButton:string = 'Show Address';
+  nums:number[]=[4,2,7,1,6,9,8,3];
+  numsTemp: number[] =[4,2,7,1,6,9,8,3];
   calc(op:string){
 
     switch(op){
@@ -35,6 +37,23 @@ export class AppComponent {
         this.lblButton='Hide Address';
     else
         this.lblButton='Show Address';
+  }
+
+  filterArray(op){
+    switch(op){
+      case 'even':
+        this.nums = this.numsTemp;
+        this.nums = this.nums.filter(n=>n%2==0);
+        break;
+      case 'odd':
+        this.nums = this.numsTemp;
+        this.nums = this.nums.filter(n=>n%2==1);
+        break;
+      case 'reset':
+        this.nums = this.numsTemp;
+        break;
+
+    }
   }
 }
 /*
