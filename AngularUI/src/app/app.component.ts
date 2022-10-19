@@ -9,9 +9,10 @@ export class AppComponent {
   x:number=20;
   y:number=10;
   result:number;
-
+  showAddress: boolean = false;
+  lblButton:string = 'Show Address';
   calc(op:string){
-    console.log('calc called... ' + op);
+
     switch(op){
       case 'add':
         this.result = this.x + this.y;
@@ -26,6 +27,14 @@ export class AppComponent {
         this.result = this.x / this.y;
         break;
     }
+  }
+
+  toggleAddress(){
+    this.showAddress = !this.showAddress;
+    if(this.showAddress == true)
+        this.lblButton='Hide Address';
+    else
+        this.lblButton='Show Address';
   }
 }
 /*
