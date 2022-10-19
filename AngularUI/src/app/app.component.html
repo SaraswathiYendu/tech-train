@@ -1,50 +1,8 @@
-<h1>Hello Angular!!</h1>
-<p>x={{x}}</p>
-<p>y={{y}}</p>
-
-<button (click)="calc('add')">Add</button>
-<button (click)="calc('sub')">Sub</button>
-<button (click)="calc('mul')">Mul</button>
-<button (click)="calc('div')">Div</button>
-<div *ngIf="result">
-  Result is: {{result}}
-</div>
+<app-calc></app-calc>
 <hr>
-<h3>Toggle Effect-Show contact details</h3>
-<button (click)="toggleAddress()"> {{lblButton}}</button>
-<div class="contact-box" *ngIf="showAddress">
-  Example.com INC <br />
-  10 Gandhi Nagar, <br />
-  station road <br />
-  Delhi. <br />
-  Contact: 8855660033
-</div>
+<app-toggle></app-toggle>
 <hr>
-<h3>Array Ops</h3>
-<ul>
-  <li *ngFor="let n of nums">
-      {{n}}
-  </li>
-</ul>
-<button (click)="filterArray('even')">Even</button>
-<button (click)="filterArray('odd')">Odd</button>
-<button (click)="filterArray('reset')">Reset</button>
+<app-array-ops></app-array-ops>
+ <hr>
+<app-employee-ops></app-employee-ops>
 <hr>
-<h3>Array of Object Ops</h3>
-
-<div class="search">
-  <input type="text" placeholder="Search by Name" [(ngModel)]="ename" (change)='search("name")'> &nbsp;&nbsp;&nbsp;
-  <input type="text" placeholder="Search by City" [(ngModel)]="ecity" (keyup)='search("city")'>
-</div>
-<div class="sort">
-  <button (click)="sortEmployees('ASC')">Salary Sort: ASC</button> &nbsp;&nbsp;&nbsp;
-  <button (click)="sortEmployees('DESC')">Salary Sort: DESC</button>
-</div>
-<div class="employee-box" *ngFor="let e of employees">
-  ID: {{e.id}}  <br />
-  Name: {{e.name}} <br />
-  Salary: {{e.salary}} <br />
-  City: {{e.city}}
-</div>
-
-

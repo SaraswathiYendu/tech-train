@@ -1,0 +1,9 @@
+<h3>Toggle Effect-Show contact details</h3>
+<button (click)="toggleAddress()"> {{lblButton}}</button>
+<div class="contact-box" *ngIf="showAddress">
+  Example.com INC <br />
+  10 Gandhi Nagar, <br />
+  station road <br />
+  Delhi. <br />
+  Contact: 8855660033
+</div>

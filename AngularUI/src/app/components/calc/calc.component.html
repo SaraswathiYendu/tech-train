@@ -1,0 +1,11 @@
+<h1>Hello Angular!!</h1>
+<p>x={{x}}</p>
+<p>y={{y}}</p>
+
+<button (click)="calc('add')">Add</button>
+<button (click)="calc('sub')">Sub</button>
+<button (click)="calc('mul')">Mul</button>
+<button (click)="calc('div')">Div</button>
+<div *ngIf="result">
+  Result is: {{result}}
+</div>
