@@ -1,0 +1,41 @@
+/.metadata/
+# Compiled output
+/AngularUI/dist
+/AngularUI/tmp
+/AngularUI/out-tsc
+/AngularUI/bazel-out
+
+# Node
+/AngularUI/node_modules
+/AngularUI/npm-debug.log
+/AngularUI/yarn-error.log
+
+# IDEs and editors
+/AngularUI/.idea/
+/AngularUI/.project
+/AngularUI/.classpath
+/AngularUI/.c9/
+*.launch
+/AngularUI/.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/AngularUI/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/AngularUI/AngularUI/libpeerconnection.log
+/AngularUI/testem.log
+/typings
+
+# System files
+.DS_Store
+/AngularUI/Thumbs.db
