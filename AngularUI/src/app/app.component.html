@@ -29,3 +29,22 @@
 <button (click)="filterArray('even')">Even</button>
 <button (click)="filterArray('odd')">Odd</button>
 <button (click)="filterArray('reset')">Reset</button>
+<hr>
+<h3>Array of Object Ops</h3>
+
+<div class="search">
+  <input type="text" placeholder="Search by Name"> &nbsp;&nbsp;&nbsp;
+  <input type="text" placeholder="Search by City">
+</div>
+<div class="sort">
+  <button>Salary Sort: ASC</button> &nbsp;&nbsp;&nbsp;
+  <button>Salary Sort: DESC</button>
+</div>
+<div class="employee-box" *ngFor="let e of employees">
+  ID: {{e.id}}  <br />
+  Name: {{e.name}} <br />
+  Salary: {{e.salary}} <br />
+  City: {{e.city}}
+</div>
+
+
