@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Employee } from 'src/models/Employee';
 
 @Component({
@@ -10,35 +10,14 @@ export class EmployeeOpsComponent implements OnInit {
   ename: string;
   ecity: string;
 
-  e1:Employee={
-    id:1,
-    name: 'harry potter',
-    salary: 85000,
-    city: 'london'
-  };
-
-  e2: Employee={
-    id:2,
-    name: 'ronald weasley',
-    salary: 75000,
-    city: 'surrey'
-  };
-
-  e3: Employee={
-    id:3,
-    name: 'hermione granger',
-    salary: 95000,
-    city: 'london'
-  };
-
-  /* Create an Array of Employee and push the objects in the array */
-  employees: Employee[]= [this.e1,this.e2,this.e3];
-  tempEmployees: Employee[]= [this.e1,this.e2,this.e3];
-
+  @Input("employees")
+  employees: Employee[]=[];
+  tempEmployees: Employee[];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.tempEmployees = [...this.employees];
   }
 
   search(criteria:string){

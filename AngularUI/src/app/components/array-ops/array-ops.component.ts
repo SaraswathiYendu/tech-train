@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-array-ops',
@@ -6,12 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./array-ops.component.css']
 })
 export class ArrayOpsComponent implements OnInit {
-  nums:number[]=[4,2,7,1,6,9,8,3];
-  numsTemp: number[] =[4,2,7,1,6,9,8,3];
+  @Input("nums")
+  nums:number[];
+
+  @Input("temp")
+  numsTemp: number[];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.numsTemp = [...this.nums];
   }
 
   filterArray(op){
