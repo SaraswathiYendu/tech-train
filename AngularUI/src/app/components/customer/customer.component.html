@@ -1,0 +1,9 @@
+<h1> Customers with POlicy info </h1>
+
+<div *ngFor="let c of customers">
+    {{c.name}} from {{c.city}} <br >
+    <span *ngFor="let p of c.policy">
+        - {{p.title}} <br />
+    </span>
+    <br /><br /><br />
+</div>

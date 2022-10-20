@@ -10,9 +10,12 @@ import { Todo } from 'src/models/Todo';
 export class TodoComponent implements OnInit {
 
   todos: Todo[];
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService) {
+    console.log('constructor called...');
+  }
 
   ngOnInit(): void {
+    console.log('ngOninit called...');
       this.todoService.getAllTodos().subscribe(data=>{
           this.todos = data;
       })

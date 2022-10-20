@@ -10,6 +10,7 @@ import { ArrayOpsComponent } from './components/array-ops/array-ops.component';
 import { EmployeeOpsComponent } from './components/employee-ops/employee-ops.component';
 import { PostComponent } from './components/post/post.component';
 import { TodoComponent } from './components/todo/todo.component';
+import { CustomerComponent } from './components/customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TodoComponent } from './components/todo/todo.component';
     ArrayOpsComponent,
     EmployeeOpsComponent,
     PostComponent,
-    TodoComponent
+    TodoComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
