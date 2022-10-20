@@ -9,6 +9,7 @@ import { ToggleComponent } from './components/toggle/toggle.component';
 import { ArrayOpsComponent } from './components/array-ops/array-ops.component';
 import { EmployeeOpsComponent } from './components/employee-ops/employee-ops.component';
 import { PostComponent } from './components/post/post.component';
+import { TodoComponent } from './components/todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PostComponent } from './components/post/post.component';
     ToggleComponent,
     ArrayOpsComponent,
     EmployeeOpsComponent,
-    PostComponent
+    PostComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

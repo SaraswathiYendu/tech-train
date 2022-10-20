@@ -9,10 +9,12 @@ import { Post } from 'src/models/Post';
 })
 export class PostComponent implements OnInit {
   posts: Post[];
-  constructor(private postService: PostService) { }
+  constructor(private postService:
+                    PostService) { }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe(data=>{
+    this.postService.getAllPosts()
+    .subscribe(data=>{
       this.posts = data;
     });
   }
