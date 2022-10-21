@@ -12,6 +12,14 @@ import { PostComponent } from './components/post/post.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { HealthComponent } from './components/health/health.component';
+import { LifeComponent } from './components/life/life.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { LoginComponent } from './auth/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +31,15 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
     PostComponent,
     TodoComponent,
     CustomerComponent,
-    SignUpComponent
+    SignUpComponent,
+    NavbarComponent,
+    HomeComponent,
+    HealthComponent,
+    LifeComponent,
+    VehicleComponent,
+    ContactComponent,
+    LoginComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
