@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { EmployeeOpsComponent } from './components/employee-ops/employee-ops.com
 import { PostComponent } from './components/post/post.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +22,15 @@ import { CustomerComponent } from './components/customer/customer.component';
     EmployeeOpsComponent,
     PostComponent,
     TodoComponent,
-    CustomerComponent
+    CustomerComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
