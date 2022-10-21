@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { UserInfo } from 'src/models/UserInfo';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +11,8 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 export class SignUpComponent implements OnInit {
 
   loginForm: FormGroup;
-  constructor() { }
+  msg: string;
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -20,6 +23,21 @@ export class SignUpComponent implements OnInit {
   }
 
   onFormSubmit(){
-      console.log(this.loginForm.value);
+      let userInfo: UserInfo ={
+        name: this.loginForm.value.name,
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      };
+
+      this.userService.signUp(userInfo).subscribe({
+        next: (data)=>{
+          //if api is successful, I will be here
+          this.msg='SignUp Success!!';
+        },
+        error: (error)=>{
+          //if api has errors, I will be here
+          this.msg = 'Could not process operation, please Try again';
+        }
+      })
   }
 }
