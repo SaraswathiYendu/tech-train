@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { UserInfo } from 'src/models/UserInfo';
+ import { UserInfo } from 'src/models/UserInfo';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   msg: string;
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -26,15 +28,32 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     };
-
-
-    this.userService.login(userInfo).subscribe({
+    let token = btoa(userInfo.email+':'+userInfo.password);
+    this.userService.login(userInfo, token).subscribe({
       next:  (data)=>{
-          console.log('login success');
-          console.log(data);
+          localStorage.setItem('token',token );
+          localStorage.setItem('role', data.role );
+          localStorage.setItem('email', data.email );
+
+          switch(data.role){
+              case "CUSTOMER":
+                this.router.navigateByUrl("/home");
+                break;
+              case "VENDOR":
+                this.router.navigateByUrl("/vendor");
+                break;
+              case "ADMIN":
+                this.router.navigateByUrl("/admin");
+                break;
+              default:
+                localStorage.clear();
+                this.router.navigateByUrl("/login");
+                break;
+          }
        },
       error: (error)=>{
-          console.log(error);
+        this.msg = 'Invalid Credentials';
+        localStorage.clear();
       }
     });
   }

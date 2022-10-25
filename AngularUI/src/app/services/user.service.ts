@@ -23,8 +23,8 @@ export class UserService {
       return this.http.post('http://localhost:8585/customer/add', obj);
   }
 
-  login(userInfo: UserInfo) : Observable<UserInfo>{
-    let token = btoa(userInfo.email+':'+userInfo.password);
+  login(userInfo: UserInfo, token: string) : Observable<UserInfo>{
+
     let header={'Authorization':'Basic '+token};
     /*
     let httpOptions = {

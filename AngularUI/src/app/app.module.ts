@@ -20,6 +20,8 @@ import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './auth/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DashboardComponent } from './vendor-components/dashboard/dashboard.component';
+import { AdmindashboardComponent } from './admin-components/admindashboard/admindashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     VehicleComponent,
     ContactComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DashboardComponent,
+    AdmindashboardComponent
   ],
   imports: [
     BrowserModule,
