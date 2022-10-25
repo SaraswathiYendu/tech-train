@@ -18,8 +18,8 @@ import com.springboot.api.repository.UserRepository;
 import com.springboot.api.repository.VendorRepository;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4202"})
-public class UserController {
+@CrossOrigin(origins = {"http://localhost:4200"})
+ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired

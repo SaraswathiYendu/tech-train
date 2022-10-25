@@ -23,7 +23,7 @@ import com.springboot.api.repository.PolicyRepository;
 import com.springboot.api.repository.UserRepository;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4202"})
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class CustomerController {
 	
 	@Autowired

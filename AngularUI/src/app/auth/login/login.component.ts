@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password
     };
 
-    console.log(userInfo);
+
     this.userService.login(userInfo).subscribe({
       next:  (data)=>{
           console.log('login success');
-
+          console.log(data);
        },
       error: (error)=>{
           console.log(error);
