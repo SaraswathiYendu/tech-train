@@ -32,10 +32,11 @@ export class SignUpComponent implements OnInit {
       this.userService.signUp(userInfo).subscribe({
         next: (data)=>{
           //if api is successful, I will be here
-          this.msg='SignUp Success!!';
+          this.msg=data.msg;
         },
         error: (error)=>{
           //if api has errors, I will be here
+          console.log(error);
           this.msg = 'Could not process operation, please Try again';
         }
       })

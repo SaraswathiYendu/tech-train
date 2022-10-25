@@ -1,6 +1,6 @@
 export class UserInfo{
   id?:number;
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
   password?: string;
 }

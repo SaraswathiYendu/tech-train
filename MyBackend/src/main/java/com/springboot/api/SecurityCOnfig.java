@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.springboot.api.dto.ResponseDto;
 import com.springboot.api.service.MyUserDetailsService;
 
 @Configuration
@@ -53,6 +54,7 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.httpBasic()
 		.and()
+		.cors().disable()
 		.csrf().disable();		
 	}
 	
@@ -70,4 +72,10 @@ public class SecurityCOnfig extends WebSecurityConfigurerAdapter{
 		return dao; 
 	}
 	
+	/* 
+	@Bean
+	public ResponseDto getReponseDto() {
+		return new ResponseDto();
+	}
+	*/
 }

@@ -3,10 +3,12 @@ package com.springboot.api.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.api.dto.CustomerDto;
+import com.springboot.api.dto.UserDto;
 import com.springboot.api.dto.VendorDto;
 import com.springboot.api.model.Customer;
 import com.springboot.api.model.User;
@@ -16,6 +18,7 @@ import com.springboot.api.repository.UserRepository;
 import com.springboot.api.repository.VendorRepository;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4202"})
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
@@ -24,8 +27,9 @@ public class UserController {
 	@Autowired
 	private VendorRepository vendorRepository; 
 	
+	 
 	@GetMapping("/user/login") //<-- authenticated in security config
-	public User userLogin(Principal principal) { //<-- DI
+	public UserDto userLogin(Principal principal) { //<-- DI
 		//At this line spring already has username and password of the user.
 		
 		/* Read the username from spring using Principal */
@@ -34,7 +38,9 @@ public class UserController {
 		/* fetch user details on the basis of this username */
 		User user = userRepository.findByUsername(username);
 		
-		return user; 
+		UserDto dto = new UserDto(user.getUsername(),user.getRole());
+		
+		return dto; 
 	}
 	
 	@GetMapping("/user/details")
