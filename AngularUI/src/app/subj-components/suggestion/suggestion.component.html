@@ -1,0 +1,5 @@
+<h1>Connection Suggestions</h1>
+
+<div *ngFor="let r of requestArry">
+  {{r.name}}  <button (click)="onRequestClick(r.id)">Request to Connect</button>
+</div>

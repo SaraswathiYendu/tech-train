@@ -22,6 +22,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardComponent } from './vendor-components/dashboard/dashboard.component';
 import { AdmindashboardComponent } from './admin-components/admindashboard/admindashboard.component';
+import { SuggestionComponent } from './subj-components/suggestion/suggestion.component';
+import { PendingRequestComponent } from './subj-components/pending-request/pending-request.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { AdmindashboardComponent } from './admin-components/admindashboard/admin
     LoginComponent,
     PageNotFoundComponent,
     DashboardComponent,
-    AdmindashboardComponent
+    AdmindashboardComponent,
+    SuggestionComponent,
+    PendingRequestComponent
   ],
   imports: [
     BrowserModule,
