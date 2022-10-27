@@ -1,1 +1,84 @@
-<p>sign-up works!</p>
+<div class="row">
+  <div class="col-sm-4"> </div>
+  <div class="col-sm-6">
+    <div class="card col-lg-7">
+      <div class="card-header">
+        Sign up
+      </div>
+
+      <div class="card-body">
+        <div class="alert alert-info" role="alert" *ngIf="msg">
+           {{msg}} &nbsp;&nbsp;&nbsp;
+           Go to <a routerLink="/login">LOGIN</a>
+        </div>
+     <form [formGroup]="signupForm" (submit)="onFormSubmit()">
+      <div class="mb-3 col-lg-12">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input type="text" formControlName="name" class="form-control"  placeholder="Enter your name">
+      </div>
+      <div class="alert alert-danger" role="alert"
+      *ngIf="signupForm.controls['name'].touched && signupForm.controls['name'].invalid">
+         <span *ngIf="signupForm.controls['name'].errors['required']">Name is required</span>
+         <span *ngIf="signupForm.controls['name'].errors['pattern']">Enter valid name</span>
+      </div>
+      <div class="mb-3 col-lg-12">
+        <label for="exampleFormControlInput1" class="form-label">Job Title: </label>
+         <select formControlName="jobTitle" class="form-control">
+          <option value="Developer">Developer</option>
+          <option value="Product Owner">Product Owner</option>
+          <option value="Scrum Master">Scrum Master</option>
+          <option value="Sr. Developer">Sr. Developer</option>
+          <option value="Sw Tester">Sw Tester</option>
+
+         </select>
+      </div>
+      <div class="alert alert-danger" role="alert"
+      *ngIf="signupForm.controls['jobTitle'].touched && signupForm.controls['jobTitle'].invalid">
+         <span *ngIf="signupForm.controls['name'].errors['required']">JobTitle is required</span>
+       </div>
+
+       <div class="mb-3 col-lg-12">
+        <label for="exampleFormControlInput1" class="form-label">Manager: </label>
+         <select formControlName="managerId" class="form-control">
+          <option value="Developer">Albus Dumbledore</option>
+
+
+         </select>
+      </div>
+      <div class="alert alert-danger" role="alert"
+      *ngIf="signupForm.controls['managerId'].touched && signupForm.controls['managerId'].invalid">
+         <span *ngIf="signupForm.controls['managerId'].errors['required']">Manager is required</span>
+       </div>
+
+      <div class="mb-3 col-lg-12">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" formControlName="email" class="form-control"  placeholder="name@example.com">
+      </div>
+      <div class="alert alert-danger" role="alert"
+      *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid">
+         <span *ngIf="signupForm.controls['email'].errors['required']">Email is required</span>
+         <span *ngIf="signupForm.controls['email'].errors['email']">Enter valid Email</span>
+
+       </div>
+      <div class="mb-3 col-lg-12">
+        <label for="exampleFormControlInput1" class="form-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" placeholder="Enter your password">
+      </div>
+      <div class="alert alert-danger" role="alert"
+      *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
+         <span *ngIf="signupForm.controls['password'].errors['required']">Password is required</span>
+         <span *ngIf="signupForm.controls['password'].errors['minlength']">Password should be atleast 4 chars</span>
+      </div>
+      <div class="mb-3 col-lg-12">
+        <input type="submit" class="btn btn-primary col-lg-12" value="Sign Up"
+        [disabled]="!signupForm.valid">
+      </div>
+     </form>
+     </div>
+     <div class="card-footer">
+      Have access already?  <a routerLink="/login">Login</a>
+    </div>
+     </div>
+  </div>
+  <div class="col-sm-2"> </div>
+</div>
