@@ -9,8 +9,9 @@
       <div class="card-body">
         <div class="alert alert-info" role="alert" *ngIf="msg">
            {{msg}} &nbsp;&nbsp;&nbsp;
-           Go to <a routerLink="/login">LOGIN</a>
+           <span *ngIf="signupSuccess"> Go to <a routerLink="/login">LOGIN</a> </span>
         </div>
+
      <form [formGroup]="signupForm" (submit)="onFormSubmit()">
       <div class="mb-3 col-lg-12">
         <label for="exampleFormControlInput1" class="form-label">Name</label>
