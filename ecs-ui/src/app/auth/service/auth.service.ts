@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-
   constructor(private http: HttpClient) { }
 
   postEmployee(employee: Employee, managerId: number) : Observable<any>{
@@ -17,4 +16,8 @@ export class AuthService {
     , employee);
   }
 
+  login(token: string) {
+    let header={'Authorization':'Basic '+token};
+    this.http.get('', {headers:header })
+  }
 }
