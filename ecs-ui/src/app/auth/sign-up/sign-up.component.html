@@ -40,7 +40,7 @@
        <div class="mb-3 col-lg-12">
         <label for="exampleFormControlInput1" class="form-label">Manager: </label>
          <select formControlName="managerId" class="form-control">
-          <option value="Developer">Albus Dumbledore</option>
+          <option value={{m.id}} *ngFor="let m of managerArry"> {{m.name}}</option>
 
 
          </select>
