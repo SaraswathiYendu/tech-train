@@ -21,6 +21,28 @@ public class Employee {
 	@OneToOne
 	private Manager manager;
 
+	/*
+	 id: --,
+	 name: --,
+	 jobTitle: --,
+	 user:{
+	 	id: --
+	 	username: --
+	 	password: --
+	 	role: --
+	 },
+	 manager:{
+	 	id: 
+	 	
+	 }
+	 --------------
+	 id: --,
+	 name: --,
+	 jobTitle: --,
+	 username: --,
+	 password: --
+	 
+	 */
 	public Long getId() {
 		return id;
 	}

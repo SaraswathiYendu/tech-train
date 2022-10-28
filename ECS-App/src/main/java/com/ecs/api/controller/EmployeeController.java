@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecs.api.dto.ReqEmployeeDto;
 import com.ecs.api.dto.ResponseDto;
 import com.ecs.api.model.Employee;
 import com.ecs.api.model.Manager;
@@ -45,7 +46,7 @@ public class EmployeeController {
 	 * Desc: Post employee in the DB
 	 */
 	@PostMapping("/add/{managerId}")
-	public ResponseEntity<Object> postEmployee(@RequestBody Employee employee, 
+	public ResponseEntity<Object> postEmployee(@RequestBody ReqEmployeeDto employeeDto, 
 							 @PathVariable("managerId") Long managerId) {
 		
 		/* Fetch Manager Record from DB using managerId */
@@ -60,7 +61,9 @@ public class EmployeeController {
 		Manager manager = optional.get();
 		
 		/* Fetch User from request body and save it in DB */
- 		User user = employee.getUser(); //this user does not have an ID
+ 		User user = new User(); //this user does not have an ID
+ 		user.setUsername(employeeDto.getUsername());
+ 		user.setPassword(employeeDto.getPassword());
 		user.setRole("EMPLOYEE");
 		user.setEnabled(false);
 		
@@ -70,7 +73,10 @@ public class EmployeeController {
 		
 		user = userRepository.save(user); //spring will assign an ID to this user
 		
-		/* Attach the saved User to manager and persist/save the manager in DB*/
+		/* Attach the saved User & manager to employee and persist/save the employee in DB*/
+		Employee employee = new Employee();
+		employee.setName(employeeDto.getName());
+		employee.setJobTitle(employeeDto.getJobTitle());
 		employee.setUser(user);
 		
 		/* Attach Manager to employee*/
