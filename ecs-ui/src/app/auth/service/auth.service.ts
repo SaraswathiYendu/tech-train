@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from 'src/app/models/employee.model';
+import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,8 +17,8 @@ export class AuthService {
     , employee);
   }
 
-  login(token: string) {
+  login(token: string) : Observable<User>{
     let header={'Authorization':'Basic '+token};
-    this.http.get('', {headers:header })
+    return this.http.get<User>(environment.serverUrl + '/user/login', {headers:header })
   }
 }

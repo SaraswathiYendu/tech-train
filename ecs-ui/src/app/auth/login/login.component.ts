@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormControl, Validators} from '@angular/forms';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   msg:string;
+  user: User;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -23,7 +25,15 @@ export class LoginComponent implements OnInit {
   onFormSubmit(){
       /* Read username/password and generate token */
       let token = window.btoa(this.loginForm.value.email + ':' + this.loginForm.value.password);
-      this.authService.login(token);
+      this.authService.login(token).subscribe({
+        next: (data)=>{
+            this.user = data;
+            console.log('login success ' + this.user.role);
+        },
+        error: (error)=>{
+            this.msg = 'Invalid Credentials';
+        }
+      });
     }
 
 }
