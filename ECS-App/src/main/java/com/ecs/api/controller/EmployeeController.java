@@ -1,5 +1,7 @@
 package com.ecs.api.controller;
 
+import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -87,5 +90,15 @@ public class EmployeeController {
 		responseDto.setMsg("Sign Up Success");
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(responseDto);
+	}
+	
+	@GetMapping("/manager/all")
+	public List<ReqEmployeeDto> getEmployeesByManagerUser(Principal principal) {
+		String username = principal.getName();
+		System.out.println(username);
+		/* fetch all employees by manager email */
+		List<Employee>  list = employeeRepository.getEmployeesByManagerUser(username,false);
+		List<ReqEmployeeDto> listDto = ReqEmployeeDto.convert(list);
+		return listDto;
 	}
 }
