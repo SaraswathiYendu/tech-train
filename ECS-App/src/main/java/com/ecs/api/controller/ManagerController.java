@@ -1,5 +1,6 @@
 package com.ecs.api.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,5 +80,21 @@ public class ManagerController {
 			
 		}
 		return listDto; 
+	}
+	
+	@GetMapping("/one")
+	public ResManagerDto getSingleManager(Principal principal) {
+		String username = principal.getName();
+		/* Go to manager repo and fetch details by username */
+		Manager manager  = managerRepository.getByUsername(username);
+		 
+		/* convert Manager model into Manager dto */
+		resManagerDto.setId(manager.getId());   //100X
+		resManagerDto.setName(manager.getName());
+		resManagerDto.setJobTitle(manager.getJobTitle());
+		resManagerDto.setUsername(manager.getUser().getUsername());
+		resManagerDto.setRole(manager.getUser().getRole());
+		
+		return resManagerDto;
 	}
 }
