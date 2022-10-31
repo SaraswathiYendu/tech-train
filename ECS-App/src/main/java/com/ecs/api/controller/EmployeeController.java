@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -86,7 +87,7 @@ public class EmployeeController {
 		employee.setManager(manager);
 		
 		employeeRepository.save(employee);
-		
+		 
 		responseDto.setMsg("Sign Up Success");
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(responseDto);
@@ -95,10 +96,34 @@ public class EmployeeController {
 	@GetMapping("/manager/all")
 	public List<ReqEmployeeDto> getEmployeesByManagerUser(Principal principal) {
 		String username = principal.getName();
-		System.out.println(username);
+		
 		/* fetch all employees by manager email */
 		List<Employee>  list = employeeRepository.getEmployeesByManagerUser(username,false);
 		List<ReqEmployeeDto> listDto = ReqEmployeeDto.convert(list);
 		return listDto;
 	}
-}
+	
+	@PutMapping("/grant-access/{employeeId}")
+	public ResponseEntity<ResponseDto> grantAccess(@PathVariable("employeeId") Long employeeId) {
+		/* fetch employee from DB using employeeId */
+		Optional<Employee> optional = employeeRepository.findById(employeeId); 
+		if(!optional.isPresent()) {
+			responseDto.setMsg("Employee ID Invalid");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(responseDto);
+		}
+		Employee employee = optional.get();
+		
+		/* set User isEnabled to true */
+		User user = employee.getUser();
+		user.setEnabled(true);
+		
+		/* Save user and employee again */
+		user = userRepository.save(user);
+		employeeRepository.save(employee);
+		responseDto.setMsg("Employee Granted Access");
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(responseDto);
+	}
+}//{msg: ""}
+ 
