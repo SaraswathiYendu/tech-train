@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Manager } from 'src/app/models/manager.model';
 
 @Component({
   selector: 'app-manager-info',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
 
-  constructor() { }
+  @Input("manager")
+  manager : Manager;
+
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  logout(){
+    //delete the token from local storage
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
+  }
 }

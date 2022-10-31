@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from 'src/app/models/employee.model';
+import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
   selector: 'app-manager-access',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessComponent implements OnInit {
 
-  constructor() { }
+  employees: Employee[];
+  constructor(private managerService: ManagerService) { }
 
   ngOnInit(): void {
+    this.managerService.getAllEmployeeNotHavingAccess(localStorage.getItem('token'))
+    .subscribe({
+      next: (data)=>{
+        this.employees = data;
+      },
+      error: (error)=>{
+
+      }
+    });
   }
 
 }

@@ -3,5 +3,5 @@ export class Employee{
   name: string;
   jobTitle: string;
   username: string;
-  password: string;
+  password?: string;
 }
