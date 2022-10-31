@@ -1,6 +1,17 @@
-<div class="alert alert-primary" role="alert" *ngFor="let e of employees">
-   Name: {{e.name}} , JobTitle: {{e.jobTitle}} <br />
-   Email/Username: {{e.username}} <br />
-   <button class="btn btn-info">Grant Access</button>
 
+<div class="card">
+  <div class="card-body">
+    <div class="alert alert-danger" role="alert" *ngIf="msg">
+       {{msg}}
+    </div>
+
+    <div class="alert alert-primary" role="alert" *ngFor="let e of employees">
+      Name: {{e.name}} , JobTitle: {{e.jobTitle}} <br />
+      Email/Username: {{e.username}} <br />
+      <button class="btn btn-info" (click)="grantAccess(e.id)">Grant Access</button>
+
+   </div>
+  </div>
 </div>
+
+

@@ -10,6 +10,7 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class AccessComponent implements OnInit {
 
   employees: Employee[];
+  msg: string;
   constructor(private managerService: ManagerService) { }
 
   ngOnInit(): void {
@@ -22,6 +23,19 @@ export class AccessComponent implements OnInit {
 
       }
     });
+  }
+
+  grantAccess(employeeId: number){
+      this.managerService.grantAccess(employeeId, localStorage.getItem('token'))
+      .subscribe({
+        next: (data)=>{
+            this.msg =  data.msg;
+            this.employees = this.employees.filter(e=> e.id !== employeeId);
+        },
+        error: (error)=>{
+          this.msg = error.error.msg;
+        }
+      });
   }
 
 }
