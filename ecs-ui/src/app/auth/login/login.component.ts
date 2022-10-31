@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from '../service/auth.service';
 
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   msg:string;
   user: User;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -28,10 +29,25 @@ export class LoginComponent implements OnInit {
       this.authService.login(token).subscribe({
         next: (data)=>{
             this.user = data;
-            console.log('login success ' + this.user.role);
+            localStorage.setItem('token',token );
+            switch(this.user.role){
+                case 'EMPLOYEE':
+                  break;
+                case 'MANAGER':
+                  /* Transfer to Manager Dashboard*/
+                  this.router.navigateByUrl('/manager');
+                  break;
+                default:
+                  break;
+            }
         },
         error: (error)=>{
-            this.msg = 'Invalid Credentials';
+          if(error.status === 403)
+          {
+            this.msg = error.error.msg;
+          }
+          else
+            this.msg="Invalid Credentials";
         }
       });
     }

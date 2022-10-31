@@ -8,7 +8,6 @@ import { Manager } from "../models/manager.model";
   providedIn: 'root'
 })
 export class ManagerService{
-
   constructor(private http: HttpClient){
 
   }
@@ -16,4 +15,8 @@ export class ManagerService{
     return this.http.get<Manager[]>(environment.serverUrl+ '/manager/all');
   }
 
+  getManagerInfo(token: string): Observable<Manager> {
+    let header={'Authorization':'Basic '+token};
+    return this.http.get<Manager>(environment.serverUrl+ '/manager/one' , {headers: header});
+  }
 }
