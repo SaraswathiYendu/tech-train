@@ -12,7 +12,12 @@ import { EmployeeDashboardComponent } from './components/employee/employee-dashb
 import { InfoComponent } from './components/manager/info/info.component';
 import { AccessComponent } from './components/manager/access/access.component';
 import { LeaveComponent } from './components/manager/leave/leave.component';
-import { ListComponent } from './components/manager/list/list.component'
+import { ListComponent } from './components/manager/list/list.component';
+import { EticketComponent } from './components/employee/eticket/eticket.component';
+import { EleaveComponent } from './components/employee/eleave/eleave.component';
+import { EleaveListComponent } from './components/employee/eleave-list/eleave-list.component';
+import { EticketListComponent } from './components/employee/eticket-list/eticket-list.component';
+import { EinfoComponent } from './components/employee/einfo/einfo.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +28,12 @@ import { ListComponent } from './components/manager/list/list.component'
     InfoComponent,
     AccessComponent,
     LeaveComponent,
-    ListComponent
+    ListComponent,
+    EticketComponent,
+    EleaveComponent,
+    EleaveListComponent,
+    EticketListComponent,
+    EinfoComponent
   ],
   imports: [
     BrowserModule,

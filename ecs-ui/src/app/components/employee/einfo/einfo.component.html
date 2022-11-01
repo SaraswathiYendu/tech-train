@@ -1,0 +1,34 @@
+<div class="card"  >
+  <div class="avatar">
+      <img class="card-img-top" src="https://s.gravatar.com/avatar/34fce8ee32f3da1e0448?s=200" alt="Card image cap">
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">{{employee?.name | uppercase}}</h5>
+    <p class="card-text">Welcome to Employee Management System.
+
+    </p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Job Title:
+      <strong>{{employee?.jobTitle }}</strong>
+    </li>
+    <li class="list-group-item">Manager:
+      <strong>{{employee?.managerName | lowercase}}</strong>
+    </li>
+    <li class="list-group-item">Registered Email:
+      <strong> {{employee?.username}}</strong>
+    </li>
+    <li class="list-group-item">Total Leaves:
+      <strong> {{employee?.totalLeaves}}</strong>
+    </li>
+    <li class="list-group-item">Leaves Left:
+      <strong> {{employee?.leavesLeft}}</strong>
+    </li>
+  </ul>
+  <div class="card-body">
+    <a (click)="logout()" href="Javascript:void(0)" class="card-link">Log Out</a>
+    <a routerLink="support" class="card-link">Support</a>
+  </div>
+</div>
+

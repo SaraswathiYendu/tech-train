@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token',token );
             switch(this.user.role){
                 case 'EMPLOYEE':
+                  /* Transfer to Manager Dashboard*/
+                  this.router.navigateByUrl('/employee');
                   break;
                 case 'MANAGER':
                   /* Transfer to Manager Dashboard*/

@@ -1,1 +1,26 @@
-<p>employee-dashboard works!</p>
+<section>
+  <div class="row">
+    <div class="col-md-3" >
+        <app-einfo [employee]="employee"></app-einfo>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <app-eticket></app-eticket>
+           </div>
+          <div class="col-md-6">
+            <app-eticket-list></app-eticket-list>
+           </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <app-eleave></app-eleave>
+          </div>
+           <div class="col-md-6">
+            <app-eleave-list></app-eleave-list>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  </section>
