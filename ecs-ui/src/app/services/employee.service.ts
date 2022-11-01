@@ -16,4 +16,9 @@ export class EmployeeService{
     let header={'Authorization':'Basic '+token};
      return this.http.get<Employee>(environment.serverUrl + '/employee/one', {headers: header});
   }
+
+  postTicket(ticket: { issue: any; priority: any; }, token: string) : Observable<any>{
+    let header={'Authorization':'Basic '+token};
+    return this.http.post(environment.serverUrl + '/ticket/add',ticket, {headers: header});
+  }
 }

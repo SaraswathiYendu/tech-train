@@ -1,1 +1,30 @@
-<p>eticket works!</p>
+<div class="card">
+  <div class="card-header">
+    Raise a Ticket
+  </div>
+  <div class="card-body">
+
+    <div class="alert alert-info" role="alert" *ngIf="msg">
+       {{msg}}
+    </div>
+
+  <form [formGroup]="ticketForm" (submit)="onTicketSubmit()">
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Select Priority: </label>
+      <select class="form-select" aria-label="Default select example" formControlName="priority">
+        <option selected>Select Priority</option>
+        <option value="RED">RED - Critical</option>
+        <option value="BLUE">BLUE - Needs Attention</option>
+        <option value="YELLOW">YELLOW - Not a blocker</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Issue: </label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="issue"></textarea>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Raise Ticket" class="btn btn-primary" [disabled]="!ticketForm.valid"/>
+    </div>
+  </form>
+  </div>
+</div>
