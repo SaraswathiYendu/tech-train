@@ -1,1 +1,27 @@
-<p>eleave works!</p>
+<div class="card">
+  <div class="card-header">
+    Apply Leave
+  </div>
+  <div class="card-body">
+    <div class="alert alert-info" role="alert" *ngIf="msg">
+      {{msg}}
+   </div>
+  <form [formGroup]="leaveForm" (submit)="onLeaveSubmit()">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">From Date:</label>
+      <input type="date" class="form-control" formControlName="fromDate" id="exampleFormControlInput1" placeholder="Select date">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">To Date:</label>
+      <input type="date" class="form-control" formControlName="toDate"  id="exampleFormControlInput1" placeholder="Select date">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Number of days</label>
+      <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="days" formControlName="numDays">
+    </div>
+    <div class="mb-3">
+      <input type="submit" value="Apply Leave" class="btn btn-primary" [disabled]="!leaveForm.valid"/>
+  </div>
+</form>
+  </div>
+</div>

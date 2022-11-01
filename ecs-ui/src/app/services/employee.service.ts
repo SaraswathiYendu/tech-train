@@ -8,6 +8,7 @@ import {Employee} from '../models/employee.model'
 })
 export class EmployeeService{
 
+
   constructor(private http: HttpClient){
 
   }
@@ -20,5 +21,10 @@ export class EmployeeService{
   postTicket(ticket: { issue: any; priority: any; }, token: string) : Observable<any>{
     let header={'Authorization':'Basic '+token};
     return this.http.post(environment.serverUrl + '/ticket/add',ticket, {headers: header});
+  }
+
+  postLeave(leave: { fromDate: any; toDate: any; numDays: any; }, token: string): Observable<any> {
+    let header={'Authorization':'Basic '+token};
+    return this.http.post(environment.serverUrl + '/leave/add', leave, {headers: header});
   }
 }
