@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecs.api.dto.ReqEmployeeDto;
+import com.ecs.api.dto.ResEmployeeDto;
 import com.ecs.api.dto.ResponseDto;
 import com.ecs.api.model.Employee;
 import com.ecs.api.model.Manager;
@@ -124,6 +125,15 @@ public class EmployeeController {
 		responseDto.setMsg("Employee Granted Access");
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(responseDto);
+	}
+	
+	@GetMapping("/one")
+	public ResEmployeeDto getEmployeeDetails(Principal principal) {
+		String username = principal.getName();
+		Employee employee = employeeRepository.getEmployeeByUsername(username);
+		ResEmployeeDto dto =  ResEmployeeDto.convertToEmployeeDto(employee);
+		return dto;
+		 
 	}
 }//{msg: ""}
  
