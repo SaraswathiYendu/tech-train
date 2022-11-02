@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecs.api.dto.ResLeaveDto;
+import com.ecs.api.exception.InvalidIdException;
 import com.ecs.api.exception.ResourceNotFoundException;
 import com.ecs.api.model.Employee;
 import com.ecs.api.model.Leave;
@@ -76,6 +77,18 @@ public class LeaveController {
 		.orElseThrow(()->new ResourceNotFoundException("Invalid Leave ID given") );
 		
 		leave.setStatus(status);
+		leaveRepository.save(leave);
+	}
+	
+	@PutMapping("/update/archive/{id}/{archive}")
+	public void updateLeaveArchiveValue(
+			@PathVariable("archive") String archive,
+			@PathVariable("id") Long id) {
+		
+		Leave leave = leaveRepository.findById(id)
+		.orElseThrow(()->new InvalidIdException("Invalid Leave ID provided") );
+		
+		leave.setIsArchived(true);
 		leaveRepository.save(leave);
 	}
 }

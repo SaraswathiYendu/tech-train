@@ -20,6 +20,12 @@ public class ControllerExHandler {
 		responseDto.setMsg(ex.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDto);	 
 	}
+	
+	@ExceptionHandler(InvalidIdException.class)
+	public ResponseEntity<ResponseDto> throwInvalidIdException(InvalidIdException ex) {
+		responseDto.setMsg(ex.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDto);	 
+	}
 }
 /* 
  ExceptionHandler tells spring to call the method, where this annotation is present for 
