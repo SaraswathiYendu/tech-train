@@ -1,28 +1,20 @@
-package com.ecs.api.model;
+package com.ecs.api.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.ecs.api.model.Leave;
 
-@Entity
-@Table(name = "leave_details")
-public class Leave {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class ResLeaveDto {
 	private Long id;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	private Long numDays;
-	private LocalDate appliedAt; 
-	private String status; //{PENDING, APPROVED, DENIED}
-	private Boolean isArchived; //{TRUE,FALSE} 
-	@OneToOne
-	private Employee employee;
+	private LocalDate appliedAt;
+	private String status; // {PENDING, APPROVED, DENIED}
+	private Boolean isArchived; // {TRUE,FALSE}
+	private String employeeName;
 
 	public Long getId() {
 		return id;
@@ -72,14 +64,6 @@ public class Leave {
 		this.status = status;
 	}
 
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
 	public Boolean getIsArchived() {
 		return isArchived;
 	}
@@ -87,6 +71,30 @@ public class Leave {
 	public void setIsArchived(Boolean isArchived) {
 		this.isArchived = isArchived;
 	}
-	
-	
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public static List<ResLeaveDto> convertToDto(List<Leave> list) {
+		List<ResLeaveDto> listDto = new ArrayList<>();
+		for(Leave l : list) {
+			ResLeaveDto dto = new ResLeaveDto();
+			dto.setId(l.getId());
+			dto.setFromDate(l.getFromDate());
+			dto.setToDate(l.getToDate());
+			dto.setNumDays(l.getNumDays());
+			dto.setIsArchived(l.getIsArchived());
+			dto.setAppliedAt(l.getAppliedAt());
+			dto.setStatus(l.getStatus());
+			dto.setEmployeeName(l.getEmployee().getName());
+			listDto.add(dto);
+		}
+		
+		return listDto;
+	}
 }
