@@ -10,6 +10,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 export class EleaveListComponent implements OnInit {
 
    leaves: Leave[];
+   msg:string;
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
@@ -22,7 +23,16 @@ export class EleaveListComponent implements OnInit {
   }
 
   onArchive(id: number){
-
+        this.employeeService.archiveLeave(localStorage.getItem('token'), id)
+        .subscribe({
+          next: (data)=>{
+            this.msg='Record Archived';
+            this.leaves = this.leaves.filter(l=>l.id !== id);
+          },
+          error: (error)=>{
+            this.msg = error.error.msg;
+          }
+        })
   }
 
   getLeaves(){

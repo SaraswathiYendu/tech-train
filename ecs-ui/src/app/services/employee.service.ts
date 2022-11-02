@@ -9,6 +9,7 @@ import { Leave } from "../models/leave.model";
 })
 export class EmployeeService{
 
+
   leave$ = new BehaviorSubject<Leave>({});
 
   constructor(private http: HttpClient){ }
@@ -31,5 +32,11 @@ export class EmployeeService{
   getLeaves(token: string): Observable<Leave[]> {
     let header={'Authorization':'Basic '+token};
      return this.http.get<Leave[]>(environment.serverUrl + '/leave/all', {headers: header});
+  }
+
+  archiveLeave(token: string, id: number) : Observable<any>{
+    let header={'Authorization':'Basic '+token};
+    return this.http.put(environment.serverUrl
+      + '/leave/update/archive/' + id + '/true', {},{headers: header} );
   }
 }
