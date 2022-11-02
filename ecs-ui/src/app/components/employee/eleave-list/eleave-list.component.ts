@@ -13,6 +13,19 @@ export class EleaveListComponent implements OnInit {
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    this.getLeaves();
+    this.employeeService.leave$.subscribe({
+      next: (data)=>{
+        this.getLeaves();
+      }
+    });
+  }
+
+  onArchive(id: number){
+
+  }
+
+  getLeaves(){
     this.employeeService.getLeaves(localStorage.getItem('token')).subscribe({
       next: (data)=>{
         this.leaves = data
@@ -20,10 +33,6 @@ export class EleaveListComponent implements OnInit {
       error: (error)=>{
 
       }
-    })
-  }
-
-  onArchive(id: number){
-
+    });
   }
 }

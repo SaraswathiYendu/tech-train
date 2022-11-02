@@ -31,6 +31,7 @@ export class EleaveComponent implements OnInit {
      .subscribe({
       next: (data)=>{
         this.msg='Leave Applied'
+        this.employeeService.leave$.next(leave);
       },
       error: ()=>{
         this.msg='Application could not be processed'
