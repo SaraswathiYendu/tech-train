@@ -1,1 +1,31 @@
-<p>eleave-list works!</p>
+<div class="card">
+  <div class="card-header">
+    Pending Leaves
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">From Date</th>
+          <th scope="col">To Date</th>
+          <th scope="col">Days</th>
+          <th scope="col">Status</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let l of leaves;let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td> {{l.fromDate}} </td>
+          <td> {{l.toDate}} </td>
+          <td> {{l.numDays}} </td>
+          <td> {{l.status}} </td>
+          <td> <button (click)="onArchive(l.id)" class="btn btn-secondary"
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .0rem; --bs-btn-font-size: .75rem;">Archive</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
