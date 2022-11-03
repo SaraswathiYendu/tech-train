@@ -1,29 +1,18 @@
-<section>
+<div class="row">
+  <div class="col-lg-12">
+    <app-mnav-bar></app-mnav-bar>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-3" >
        <app-manager-info [manager]='manager'></app-manager-info>
   </div>
   <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-6">
-           <app-manager-access></app-manager-access>
-        </div>
-        <div class="col-md-6">
-           <app-manager-leave></app-manager-leave>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-            <app-manager-ticket-list></app-manager-ticket-list>
-        </div>
-        <div class="col-md-6">
-          <app-manager-list></app-manager-list>
-      </div>
-      </div>
+       <router-outlet></router-outlet>
   </div>
 </div>
 
-</section>
+
 <!--
 <div class="col-md-4">
   Ticket component
