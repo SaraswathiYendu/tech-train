@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecs.api.dto.ResEmployeeDto;
 import com.ecs.api.dto.ResManagerDto;
+import com.ecs.api.model.Employee;
 import com.ecs.api.model.Manager;
 import com.ecs.api.model.User;
+import com.ecs.api.repository.EmployeeRepository;
 import com.ecs.api.repository.ManagerRepository;
 import com.ecs.api.repository.UserRepository;
 
@@ -36,6 +39,9 @@ public class ManagerController {
 	
 	@Autowired
 	private ResManagerDto resManagerDto; 
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	/*
 	 Path: api/manager/add
 	 Description: Post manager details
@@ -97,4 +103,20 @@ public class ManagerController {
 		
 		return resManagerDto;
 	}
+	
+	@GetMapping("/employee/all")
+	public List<ResEmployeeDto> getAllEmployees(Principal principal) {
+		String managerUsername = principal.getName();
+		List<Employee> list = employeeRepository.getEmployeesByManagerUser(managerUsername, true);
+		return ResEmployeeDto.convertToEmployeeListDto(list);
+	}
 }
+
+
+
+
+
+
+
+
+

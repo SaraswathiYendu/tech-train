@@ -1,5 +1,8 @@
 package com.ecs.api.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ecs.api.model.Employee;
 
 public class ResEmployeeDto {
@@ -86,5 +89,22 @@ public class ResEmployeeDto {
 		dto.setManagerName(employee.getManager().getName());
 		/* come back and leave info once created */
 		return dto;
+	}
+	
+	public static List<ResEmployeeDto> convertToEmployeeListDto(List<Employee> list){
+		List<ResEmployeeDto> dtoList = new ArrayList<>();
+		for(Employee employee : list) {
+			ResEmployeeDto dto = new ResEmployeeDto();
+			dto.setId(employee.getId());
+			dto.setName(employee.getName());
+			dto.setJobTitle(employee.getJobTitle());
+			dto.setUsername(employee.getUser().getUsername());
+			dto.setPassword("");
+			dto.setManagerName(employee.getManager().getName());
+			dtoList.add(dto);
+		}
+		
+		/* come back and leave info once created */
+		return dtoList;
 	}
 }
