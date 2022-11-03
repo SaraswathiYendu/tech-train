@@ -49,6 +49,15 @@ public class TicketController {
 		List<ResTicketDto> listDto = ResTicketDto.convertToDto(list);
 		return listDto; 
 	}
+	
+	@GetMapping("/manager/all")
+	public List<ResTicketDto> getAllTicketsByManager(Principal principal) {
+		String username  = principal.getName();
+		String status= "OPEN";
+		List<Ticket> list = ticketRepository.getTicketByManagerUsername(username,status);
+		List<ResTicketDto> listDto = ResTicketDto.convertToDto(list);
+		return listDto; 
+	}
 }
 
 

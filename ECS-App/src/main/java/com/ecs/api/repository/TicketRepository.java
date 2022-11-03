@@ -12,4 +12,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
 	@Query("select t from Ticket t where t.status=?2 AND t.employee.user.username=?1")
 	List<Ticket> getTicketByEmployeeUsername(String username, String status);
 
+	//Ticket-> Employee -> Manager -> User -> username
+	@Query("select t from Ticket t where t.status=?2 AND t.employee.manager.user.username=?1")
+	List<Ticket> getTicketByManagerUsername(String username, String status);
+
 }
