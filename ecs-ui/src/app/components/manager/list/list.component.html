@@ -1,1 +1,27 @@
-<p>list works!</p>
+<div class="card">
+  <div class="card-header">
+    List of Employees
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Email</th>
+
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let e of employees; let i = index">
+          <th scope="row"> {{i+1}} </th>
+          <td> {{e.name}} </td>
+          <td> <b> {{e.jobTitle}}</b> </td>
+          <td> {{e.username}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

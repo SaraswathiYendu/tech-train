@@ -5,12 +5,27 @@
        {{msg}}
     </div>
 
-    <div class="alert alert-primary" role="alert" *ngFor="let e of employees">
-      Name: {{e.name}} , JobTitle: {{e.jobTitle}} <br />
-      Email/Username: {{e.username}} <br />
-      <button class="btn btn-info" (click)="grantAccess(e.id)">Grant Access</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let e of employees; let i = index">
+          <th scope="row"> {{i+1}} </th>
+          <td> {{e.name}} </td>
+          <td> <b> {{e.jobTitle}}</b> </td>
+          <td> {{e.username}} </td>
+          <td><button (click)="grantAccess(e.id)" class="btn btn-primary btn-sm">Grant Access</button></td>
+        </tr>
+      </tbody>
+    </table>
 
-   </div>
   </div>
 </div>
 

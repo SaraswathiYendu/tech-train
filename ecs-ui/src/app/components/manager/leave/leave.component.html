@@ -13,6 +13,7 @@
           <th scope="col">From Date</th>
           <th scope="col">To Date</th>
           <th scope="col">Days</th>
+          <th scope="col">Employee </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@
           <td> {{l.fromDate}} </td>
           <td> {{l.toDate}} </td>
           <td> {{l.numDays}} </td>
+          <td>{{l.employeeName}} </td>
             <td> <button (click)="onStatusUpdate(l.id, 'APPROVED')" class="btn btn-primary btn-sm"><span class="btn-text"><b>Approve</b></span></button>
               &nbsp;
               <button (click)="onStatusUpdate(l.id, 'DENY')" class="btn btn-danger btn-sm"><span class="btn-text"><b> Deny</b></span></button>

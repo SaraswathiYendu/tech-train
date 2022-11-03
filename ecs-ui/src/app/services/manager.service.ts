@@ -11,7 +11,6 @@ import { Ticket } from "../models/ticket.model";
   providedIn: 'root'
 })
 export class ManagerService{
-
   constructor(private http: HttpClient){ }
 
   fetchAllManagers() : Observable<Manager[]>{
@@ -47,6 +46,11 @@ export class ManagerService{
   fetchAllTickets(token: string) : Observable<Ticket[]>{
     let header={'Authorization':'Basic '+token};
     return this.http.get<Ticket[]>(environment.serverUrl+'/ticket/manager/all',{headers: header} );
+  }
+
+  fetchAllEmployees(token: string):Observable<Employee[]> {
+    let header={'Authorization':'Basic '+token};
+    return this.http.get<Employee[]>(environment.serverUrl+'/manager/employee/all',{headers: header} );
   }
 }
 //put post: take body

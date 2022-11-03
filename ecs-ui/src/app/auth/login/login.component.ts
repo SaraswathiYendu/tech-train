@@ -44,11 +44,8 @@ export class LoginComponent implements OnInit {
             }
         },
         error: (error)=>{
-          if(error.status === 403)
-          {
-            this.msg = error.error.msg;
-          }
-          else
+          this.msg = error.error.msg;
+          if(!error.error.msg)
             this.msg="Invalid Credentials";
         }
       });

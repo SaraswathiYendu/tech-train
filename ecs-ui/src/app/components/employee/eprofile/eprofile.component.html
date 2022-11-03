@@ -1,1 +1,40 @@
-<p>eprofile works!</p>
+
+
+<div class="card">
+  <div class="card-header">
+      Employee Profile
+  </div>
+  <div class="card-body">
+    <form class="row g-3" [formGroup]="profileForm" (submit)="onSubmit()">
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Name</label>
+        <input type="text" class="form-control" id="inputPassword4"
+         formControlName="name" >
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4"
+        formControlName="email">
+      </div>
+
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Job Title</label>
+        <input type="text" class="form-control" id="inputPassword4"
+         formControlName="jobTitle" >
+      </div>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Manager Name</label>
+        <input type="email" class="form-control" id="inputEmail4"
+        formControlName="managerName"  readonly>
+      </div>
+      <div class="col-12">
+        <input type="submit" class="btn btn-primary" value="Update Profile">
+      </div>
+    </form>
+  </div>
+</div>
