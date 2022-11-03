@@ -6,4 +6,5 @@ export class Ticket{
   response?:string;
   status?:string;
   email?:string;
+  name?:string;
 }

@@ -4,11 +4,11 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import {Employee} from '../models/employee.model'
 import { Leave } from "../models/leave.model";
+import { Ticket } from "../models/ticket.model";
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService{
-
 
   leave$ = new BehaviorSubject<Leave>({});
 
@@ -38,5 +38,10 @@ export class EmployeeService{
     let header={'Authorization':'Basic '+token};
     return this.http.put(environment.serverUrl
       + '/leave/update/archive/' + id + '/true', {},{headers: header} );
+  }
+
+  fetchTickets(token: string): Observable<Ticket[]> {
+    let header={'Authorization':'Basic '+token};
+    return this.http.get<Ticket[]>(environment.serverUrl+'/ticket/employee/all', {headers: header});
   }
 }
