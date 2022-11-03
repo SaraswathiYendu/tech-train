@@ -17,7 +17,8 @@ import { EticketComponent } from './components/employee/eticket/eticket.componen
 import { EleaveComponent } from './components/employee/eleave/eleave.component';
 import { EleaveListComponent } from './components/employee/eleave-list/eleave-list.component';
 import { EticketListComponent } from './components/employee/eticket-list/eticket-list.component';
-import { EinfoComponent } from './components/employee/einfo/einfo.component'
+import { EinfoComponent } from './components/employee/einfo/einfo.component';
+import { TicketListComponent } from './components/manager/ticket-list/ticket-list.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { EinfoComponent } from './components/employee/einfo/einfo.component'
     EleaveComponent,
     EleaveListComponent,
     EticketListComponent,
-    EinfoComponent
+    EinfoComponent,
+    TicketListComponent
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,11 @@ import { Employee } from "../models/employee.model";
 import { Leave } from "../models/leave.model";
 import { Manager } from "../models/manager.model";
 import { ResponseMsg } from "../models/response-message.model";
+import { Ticket } from "../models/ticket.model";
  @Injectable({
   providedIn: 'root'
 })
 export class ManagerService{
-
 
   constructor(private http: HttpClient){ }
 
@@ -42,6 +42,11 @@ export class ManagerService{
   updateStatus(token: string, id: number, status: string) : Observable<any>{
     let header={'Authorization':'Basic '+token};
      return this.http.put(environment.serverUrl+ '/leave/update/status/'+id+'/'+status,{}, {headers: header} );
+  }
+
+  fetchAllTickets(token: string) : Observable<Ticket[]>{
+    let header={'Authorization':'Basic '+token};
+    return this.http.get<Ticket[]>(environment.serverUrl+'/ticket/manager/all',{headers: header} );
   }
 }
 //put post: take body

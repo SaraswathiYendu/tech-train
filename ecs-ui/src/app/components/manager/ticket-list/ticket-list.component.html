@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">
+    Open Tickets of Employees
+  </div>
+  <div class="card-body">
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Issue</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Employee</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let t of tickets; let i = index">
+          <th scope="row"> {{i+1}} </th>
+          <td> {{t.issue}} </td>
+          <td> <b> {{t.priority}}</b> </td>
+          <td> {{t.name}} </td>
+          <td><button class="btn btn-primary btn-sm" >Response</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
