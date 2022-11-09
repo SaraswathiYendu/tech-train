@@ -1,0 +1,5 @@
+package com.junit.mockito.app.repository;
+
+public interface EmployeeRepository {
+
+}

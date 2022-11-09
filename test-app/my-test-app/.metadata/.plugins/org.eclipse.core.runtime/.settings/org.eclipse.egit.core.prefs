@@ -1,0 +1,4 @@
+GitRepositoriesView.GitDirectories=C\:\\HEX-TECH-SEPT\\test-app\\my-test-app\\SonarTestApp\\.git;
+GitRepositoriesView.GitDirectories.relative=SonarTestApp\\.git;
+core_autoIgnoreDerivedResources=false
+eclipse.preferences.version=1

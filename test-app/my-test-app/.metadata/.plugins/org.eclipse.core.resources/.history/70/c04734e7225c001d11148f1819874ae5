@@ -1,0 +1,43 @@
+package com.junit.mockito.app;
+
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.junit.mockito.app.model.Employee;
+import com.junit.mockito.app.repository.EmployeeRepository;
+import com.junit.mockito.app.service.EmployeeService;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+class EmployeeServiceTest {
+
+	@Autowired
+	EmployeeService employeeService;
+	
+	@Mock
+	@Autowired
+	EmployeeRepository employeeRepository;
+	
+	@Test
+	void postEmployeeTest(){
+		/* Prep data for the Test */
+		Employee employee = new Employee();
+		employee.setName("harry potter");
+		employee.setEmail("harry@gmail.com");
+		employee.setCity("london");
+		employee.setSalary(85000);
+		
+		when(employeeRepository.save(employee))
+		.thenReturn(employee);
+		
+		Assertions.assertEquals(employee, employeeService.postEmployee(employee));
+		/*Hibernate saves employee and assigns a random id */
+	}
+}

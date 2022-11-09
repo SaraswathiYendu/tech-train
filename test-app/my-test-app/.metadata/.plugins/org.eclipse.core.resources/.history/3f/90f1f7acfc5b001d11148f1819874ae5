@@ -1,0 +1,5 @@
+package com.sonarqube.app;
+
+public class MessageServiceTest {
+
+}

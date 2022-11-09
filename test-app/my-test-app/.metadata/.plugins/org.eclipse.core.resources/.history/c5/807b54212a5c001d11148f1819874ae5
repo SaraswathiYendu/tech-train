@@ -1,0 +1,79 @@
+package com.junit.mockito.app;
+
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.junit.mockito.app.model.Employee;
+import com.junit.mockito.app.repository.EmployeeRepository;
+import com.junit.mockito.app.service.EmployeeService;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class EmployeeServiceTest {
+
+	@Autowired
+	EmployeeService employeeService;
+	
+	Employee employee1;
+	Employee employee2;
+	Employee employee3;
+	Employee employee4;
+	
+	@Mock
+	@Autowired
+	EmployeeRepository employeeRepository;
+	
+	@BeforeEach
+	void init() {
+		employee1 = new Employee(1L,"harry potter","harry@gmail.com",85000,"london");
+		employee2 = new Employee(2L,"ronald weasley","ronald@gmail.com",75000,"surrey");
+		employee3 = new Employee(3L,"hermione granger","hermione@gmail.com",95000,"london");
+		employee4 = new Employee(4L,"draco malfoy","draco@gmail.com",80000,"kent");
+	}
+	
+	@Test
+	void postEmployeeTest(){
+		/* Prep data for the Test */
+		 when(employeeRepository.save(employee1))
+		.thenReturn(employee1);
+		
+		Assertions.assertEquals(employee1, employeeService.postEmployee(employee1));
+		/*Hibernate saves employee and assigns a random id */
+	}
+	
+	@Test
+	void getListTest(){
+		List<Employee> list = Arrays.asList(employee1,employee2,employee3,employee4);
+		
+		when(employeeRepository.findAll())
+		.thenReturn(list);
+		System.out.println(employeeService.getList());
+		Assertions.assertEquals(list.size(), employeeService.getList().size());
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

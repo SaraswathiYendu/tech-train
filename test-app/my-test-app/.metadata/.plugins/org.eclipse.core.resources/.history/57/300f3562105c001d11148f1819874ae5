@@ -1,0 +1,34 @@
+package com.sonarqube.app;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.sonarqube.app.service.MessageService;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+public class MessageServiceTest {
+
+	//@Mock
+	@Autowired
+	MessageService messageService;
+	
+	@Test
+	public void getMessageTest(){
+		//when(messageService.getMessage("john")).thenReturn("hey john, welcome");
+		//when(messageService.getMessage("geoff")).thenReturn("hey geoff, welcome");
+		
+		Assertions.assertEquals("Hey john, You have a call at 10.30 AM today with freedy team", 
+				messageService.getMessage("john"));
+		Assertions.assertEquals("Hey geoff, You have a call at 10AM today with toyota team", 
+				messageService.getMessage("geoff"));
+	}
+}
